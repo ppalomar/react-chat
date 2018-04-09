@@ -1,0 +1,18 @@
+.Bubble__container{
+    display: flex;
+}
+
+.Bubble__container span{
+    padding: 10px;
+    background-color: #ECF0F1;
+    border-radius: 8px;
+    margin: 10px;
+    display: flex;
+    max-width: 70%;
+}
+
+.Bubble__container.mine span{
+    margin-left: auto;
+    order: 2;
+    background-color: #66CC99;
+}

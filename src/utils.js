@@ -5,3 +5,5 @@ export const guid = () => {
 
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
+
+export const computeCommands = text => text.match(/^(\/nick|\/think|\/oops)/g);

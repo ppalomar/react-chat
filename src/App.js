@@ -30,6 +30,7 @@ class App extends Component {
             }
           break;
           case COMMANDS.THINK:
+            this.addMessage({ ...msg, text: msg.text.replace(COMMANDS.THINK, '') }, isMine, true);
           break;
           case COMMANDS.OOPS:
           break;
@@ -47,11 +48,11 @@ class App extends Component {
     };
   }
 
-  addMessage(msg, isMine=false){
+  addMessage(msg, isMine=false, isThink = false){
     const { id, text } = msg;
 
     this.setState(currentState => { 
-      const message = { id, timestamp: moment(), text, isMine };
+      const message = { id, timestamp: moment(), text, isMine, isThink };
       return { messages: [ ...currentState.messages, message ]}
     });
   }

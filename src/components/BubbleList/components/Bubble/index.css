@@ -16,3 +16,7 @@
     order: 2;
     background-color: #66CC99;
 }
+
+.Bubble__container.think span{
+    color: darkgray;
+}

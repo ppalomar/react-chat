@@ -7,6 +7,8 @@ const Bubble = ({msg}) => {
         let classes = ['Bubble__container']
         if(msg.isMine)
             classes.push('mine')
+        if(msg.isThink)
+            classes.push('think')
         return classes
     }
 

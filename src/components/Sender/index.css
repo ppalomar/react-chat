@@ -1,0 +1,8 @@
+.Sender__container{
+    display: flex;
+    padding: 20px;
+  }
+  
+  .Sender__container .input-message{
+    margin-right: 30px;
+  }

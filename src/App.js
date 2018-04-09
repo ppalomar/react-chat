@@ -7,6 +7,7 @@ import { guid, computeCommands } from './utils';
 import { COMMANDS } from './constants';
 
 import BubbleList from './components/BubbleList';
+import Header from './components/Header';
 import Sender from './components/Sender';
 
 import './App.css';
@@ -60,11 +61,12 @@ class App extends Component {
   }
 
   render() {
-    const { messages, userId } = this.state;
+    const { messages, userId, theOtherNick } = this.state;
 
     return (
       <MuiThemeProvider>
         <div className="App">
+          {theOtherNick && <Header nick={theOtherNick} />}
           <main className="App-content">
             <BubbleList messages={messages} />
           </main>

@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import moment from 'moment';
 
-import { subscribeToMessages } from './api';
+import { 
+  subscribeToMessages, 
+  subscribeToDeleteMessages, 
+  deleteMessage,
+} from './api';
 import { guid, computeCommands } from './utils';
 import { COMMANDS } from './constants';
 
-import BubbleList from './components/BubbleList';
 import Header from './components/Header';
+import BubbleList from './components/BubbleList';
 import Sender from './components/Sender';
 
 import './App.css';
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -33,6 +36,9 @@ class App extends Component {
             this.addMessage({ ...msg, text: msg.text.replace(COMMANDS.THINK, '') }, isMine, true);
           break;
           case COMMANDS.OOPS:
+            if(isMine){
+              this.emitDeleteId();
+            }
           break;
           default:
             this.addMessage(msg, isMine);
@@ -41,11 +47,27 @@ class App extends Component {
       }
     });
 
+    subscribeToDeleteMessages(msgId => {
+      this.setState(currentState => {
+        const filteredMessages = currentState.messages.filter(m => m.id !== msgId);
+        return { messages: filteredMessages };
+      })
+    });
+
     this.state = {
       messages: [],
       userId: guid(),
       theOtherNick: undefined,
     };
+  }
+
+  emitDeleteId(){
+    const { messages } = this.state;
+    const myMessages = messages.filter(m => m.isMine);
+    if(myMessages.length > 0){
+      myMessages.sort((a, b) => a.timestamp - b.timestamp)
+      deleteMessage(myMessages[myMessages.length - 1].id)
+    }
   }
 
   addMessage(msg, isMine=false, isThink = false){
@@ -76,7 +98,7 @@ class App extends Component {
           </footer>
         </div>
       </MuiThemeProvider>
-    );
+    );      
   }
 }
 

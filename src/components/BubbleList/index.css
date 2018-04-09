@@ -1,4 +1,6 @@
 .Message-List{
     margin-left: 25%;
     margin-right: 25%;
+    max-height: 85vh;
+    overflow-y: auto;
 }

@@ -5,6 +5,11 @@ io.on('connection', client => {
         console.log(`UserId: ${msg.userId} sent message: ${msg.text}`);
         io.emit('chat message', msg);
     });
+
+    client.on('delete message', id => {
+        console.log(`Deleted message: ${id}`);
+        io.emit('delete message', id);
+    });
 });
 
 const port = 8000;

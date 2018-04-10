@@ -47,7 +47,8 @@ class Sender extends Component {
                 onChange={e => this.handleChange(e)}
                 onKeyPress={e => this.handleKeyPress(e)}
                 />
-            <FloatingActionButton 
+            <FloatingActionButton
+                className="send-button"
                 secondary={true} 
                 onClick={() => this.handleSend() }
                 >

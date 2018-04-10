@@ -2,16 +2,16 @@
 
 Technologies used: 
 
--chai: ^4.1.2,
--enzyme: ^3.3.0,
--enzyme-adapter-react-16: ^1.1.1,
--material-ui: ^0.20.0,
--moment: ^2.22.0,
--react: ^16.3.1,
--react-dom: ^16.3.1,
--react-scripts: 1.1.4,
--socket.io: ^2.1.0,
--socket.io-client: ^2.1.0
+* chai: ^4.1.2,
+* enzyme: ^3.3.0,
+* enzyme-adapter-react-16: ^1.1.1,
+* material-ui: ^0.20.0,
+* moment: ^2.22.0,
+* react: ^16.3.1,
+* react-dom: ^16.3.1,
+* react-scripts: 1.1.4,
+* socket.io: ^2.1.0,
+* socket.io-client: ^2.1.0
 
 ### Install
 
@@ -38,7 +38,6 @@ You will also see any lint errors in the console.
 `yarn test` or `npm test`
 
 Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](#running-tests) for more information.
 
 ### Production Build
 
@@ -48,4 +47,3 @@ Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!

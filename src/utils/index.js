@@ -7,3 +7,8 @@ export const guid = () => {
 }
 
 export const computeCommands = text => text.match(/^(\/nick|\/think|\/oops)/g);
+
+export const sortByProperty = (prop, collection) => {
+    const sorted = collection.sort((a, b) => a[prop] - b[prop])
+    return sorted
+}

@@ -6,18 +6,30 @@ import {
   subscribeToMessages, 
   subscribeToDeleteMessages, 
   deleteMessage,
-} from './api';
-import { guid, computeCommands } from './utils';
-import { COMMANDS } from './constants';
+} from '../api';
+import { guid, computeCommands, sortByProperty } from '../utils';
+import { COMMANDS } from '../constants';
 
-import Header from './components/Header';
-import BubbleList from './components/BubbleList';
-import Sender from './components/Sender';
+import Header from './Header';
+import BubbleList from './BubbleList';
+import Sender from './Sender';
 
 import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.executeSuscribeMessages();
+    this.executeSuscribeDeleteMessages();
+
+    this.state = {
+      messages: [],
+      userId: guid(),
+      theOtherNick: undefined,
+    };
+  }
+
+  executeSuscribeMessages(){
     subscribeToMessages(msg => {
       const isMine = this.state.userId === msg.userId
       const command = computeCommands(msg.text);
@@ -46,27 +58,25 @@ class App extends Component {
         }
       }
     });
+  }
 
+  executeSuscribeDeleteMessages(){
     subscribeToDeleteMessages(msgId => {
       this.setState(currentState => {
         const filteredMessages = currentState.messages.filter(m => m.id !== msgId);
         return { messages: filteredMessages };
       })
     });
-
-    this.state = {
-      messages: [],
-      userId: guid(),
-      theOtherNick: undefined,
-    };
   }
 
   emitDeleteId(){
     const { messages } = this.state;
-    const myMessages = messages.filter(m => m.isMine);
-    if(myMessages.length > 0){
-      myMessages.sort((a, b) => a.timestamp - b.timestamp)
-      deleteMessage(myMessages[myMessages.length - 1].id)
+    let myMessages = messages.filter(m => m.isMine);
+    const haveMessages = myMessages.length > 0;
+    
+    if(haveMessages){
+      myMessages = sortByProperty('timestamp', myMessages);
+      deleteMessage(myMessages[myMessages.length - 1].id);
     }
   }
 

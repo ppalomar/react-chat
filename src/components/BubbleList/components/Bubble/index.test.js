@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import Bubble from './index';
 
 describe('<Bubble />', () => {

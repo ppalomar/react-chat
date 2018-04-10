@@ -9,9 +9,11 @@ import { shallow } from 'enzyme';
 import Header from './index';
 
 describe('<Header />', () => {
-    it('renders Header properly', () => {
-        const wrapper = shallow(<Header nick='Pablo Palomar' />);
-        expect(wrapper.find('.Header__container')).to.have.length(1);
-        expect(wrapper.find('.Header__container').text()).to.equal('Conversation with Pablo Palomar');
-    });
- });
+  it('renders Header properly', () => {
+    const wrapper = shallow(<Header nick="Pablo Palomar" />);
+    expect(wrapper.find('.Header__container')).to.have.length(1);
+    expect(wrapper.find('.Header__container').text()).to.equal(
+      'Conversation with Pablo Palomar'
+    );
+  });
+});

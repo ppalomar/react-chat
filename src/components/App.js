@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import moment from 'moment';
 
-import { 
-  subscribeToMessages, 
-  subscribeToDeleteMessages, 
+import {
+  subscribeToMessages,
+  subscribeToDeleteMessages,
   deleteMessage,
 } from '../api';
 import { guid, computeCommands, sortByProperty } from '../utils';
@@ -29,67 +29,72 @@ class App extends Component {
     };
   }
 
-  executeSuscribeMessages(){
+  executeSuscribeMessages() {
     subscribeToMessages(msg => {
-      const isMine = this.state.userId === msg.userId
+      const isMine = this.state.userId === msg.userId;
       const command = computeCommands(msg.text);
 
-      if (!command){
+      if (!command) {
         this.addMessage(msg, isMine);
-      }
-      else{
-        switch(command[0]){
+      } else {
+        switch (command[0]) {
           case COMMANDS.NICK:
-            if(!isMine){
-              this.setNick(msg.text.replace(COMMANDS.NICK, ''))
+            if (!isMine) {
+              this.setNick(msg.text.replace(COMMANDS.NICK, ''));
             }
-          break;
+            break;
           case COMMANDS.THINK:
-            this.addMessage({ ...msg, text: msg.text.replace(COMMANDS.THINK, '') }, isMine, true);
-          break;
+            this.addMessage(
+              { ...msg, text: msg.text.replace(COMMANDS.THINK, '') },
+              isMine,
+              true
+            );
+            break;
           case COMMANDS.OOPS:
-            if(isMine){
+            if (isMine) {
               this.emitDeleteId();
             }
-          break;
+            break;
           default:
             this.addMessage(msg, isMine);
-          break;
+            break;
         }
       }
     });
   }
 
-  executeSuscribeDeleteMessages(){
+  executeSuscribeDeleteMessages() {
     subscribeToDeleteMessages(msgId => {
       this.setState(currentState => {
-        const filteredMessages = currentState.messages.filter(m => m.id !== msgId);
+        const filteredMessages = currentState.messages.filter(
+          m => m.id !== msgId
+        );
         return { messages: filteredMessages };
-      })
+      });
     });
   }
 
-  emitDeleteId(){
+  emitDeleteId() {
     const { messages } = this.state;
     let myMessages = messages.filter(m => m.isMine);
     const haveMessages = myMessages.length > 0;
-    
-    if(haveMessages){
+
+    if (haveMessages) {
       myMessages = sortByProperty('timestamp', myMessages);
       deleteMessage(myMessages[myMessages.length - 1].id);
     }
   }
 
-  addMessage(msg, isMine=false, isThink = false){
+  addMessage(msg, isMine = false, isThink = false) {
     const { id, text } = msg;
 
-    this.setState(currentState => { 
+    this.setState(currentState => {
       const message = { id, timestamp: moment(), text, isMine, isThink };
-      return { messages: [ ...currentState.messages, message ]}
+      return { messages: [...currentState.messages, message] };
     });
   }
 
-  setNick(nick){
+  setNick(nick) {
     this.setState({ theOtherNick: nick });
   }
 
@@ -108,7 +113,7 @@ class App extends Component {
           </footer>
         </div>
       </MuiThemeProvider>
-    );      
+    );
   }
 }
 

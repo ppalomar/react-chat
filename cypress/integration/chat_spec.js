@@ -1,4 +1,4 @@
-describe('Kitchen Sink', function () {
+describe('Chat', function () {
     beforeEach(function () {
         cy.visit('http://localhost:3000/')
     })
@@ -59,5 +59,72 @@ describe('Kitchen Sink', function () {
         .type('{enter}');
 
         cy.get('.Bubble__container.mine').should('have.length', 0);
+    })
+
+    it('check if delete functionality works properly with command /oops', function () {
+        cy.get('.Bubble__container.mine').should('have.length', 0);
+
+        cy.get('.Sender__container').find('input')
+        .type('Hello, World');
+
+        cy.get('.Sender__container').find('input')
+        .type('{enter}');
+
+        cy.get('.Bubble__container.mine').should('have.length', 1);
+
+        cy.get('.Sender__container').find('input')
+        .type('/oops');
+
+        cy.get('.Sender__container').find('input')
+        .type('{enter}');
+
+        cy.get('.Bubble__container.mine').should('have.length', 0);
+    })
+
+    it('check if you add any text with /oops command, nothing is sent, just the command to delete', function () {
+        cy.get('.Bubble__container.mine').should('have.length', 0);
+
+        cy.get('.Sender__container').find('input')
+        .type('Hello, World');
+
+        cy.get('.Sender__container').find('input')
+        .type('{enter}');
+
+        cy.get('.Bubble__container.mine').should('have.length', 1);
+
+        cy.get('.Sender__container').find('input')
+        .type('/oops whatever');
+
+        cy.get('.Sender__container').find('input')
+        .type('{enter}');
+
+        cy.get('.Bubble__container.mine').should('have.length', 0);
+    })
+
+    it('check if a command is in the middle of the text the comman doesnt works', function () {
+        cy.get('.Bubble__container.mine').should('have.length', 0);
+
+        cy.get('.Sender__container').find('input')
+        .type('Hello, World');
+
+        cy.get('.Sender__container').find('input')
+        .type('{enter}');
+
+        cy.get('.Bubble__container.mine').should('have.length', 1);
+
+        cy.get('.Sender__container').find('input')
+        .type('whatever /oops whatever');
+
+        cy.get('.Sender__container').find('input')
+        .type('{enter}');
+
+        cy.get('.Sender__container').find('input')
+        .type('whatever /think whatever');
+
+        cy.get('.Sender__container').find('input')
+        .type('{enter}');
+
+        cy.get('.Bubble__container.mine').should('have.length', 3);
+        cy.get('.Bubble__container.mine.think').should('have.length', 0);
     })
 });

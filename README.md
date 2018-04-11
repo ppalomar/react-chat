@@ -1,5 +1,7 @@
 ## React Chat
 
+![Alt text](/sreenshots/react-chat-screenshot.png?raw=true "Screenshot of the Chat")
+
 ### Technologies used: 
 
 * chai: ^4.1.2,

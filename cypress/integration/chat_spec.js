@@ -127,4 +127,17 @@ describe('Chat', function () {
         cy.get('.Bubble__container.mine').should('have.length', 3);
         cy.get('.Bubble__container.mine.think').should('have.length', 0);
     })
+
+    it('check when you send messages from other socket see them as others messages', function () {
+        cy.get('.Bubble__container').should('have.length', 0);
+
+        cy.request('http://localhost:8081/connect')
+
+        cy.request("http://localhost:8081/message/?q=hello")
+        
+        cy.get('.Bubble__container').should('have.length', 1);
+        cy.get('.Bubble__container.mine').should('have.length', 0);
+
+        cy.request('http://localhost:8081/disconnect');
+    })
 });

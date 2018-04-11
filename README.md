@@ -1,6 +1,6 @@
 ## React Chat
 
-###Technologies used: 
+### Technologies used: 
 
 * chai: ^4.1.2,
 * cypress: ^2.1.0,

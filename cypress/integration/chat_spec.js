@@ -140,4 +140,18 @@ describe('Chat', function () {
 
         cy.request('http://localhost:8081/disconnect');
     })
+
+    it('check check when other user send command /nick is shown in the header', function () {
+        cy.request('http://localhost:8081/connect')
+
+        cy.request("http://localhost:8081/message/?q=/nickPablo")
+        
+        cy.get('.Bubble__container').should('have.length', 0);
+
+        cy.get('.Header__container').should('have.length', 1);
+
+        cy.get('.Header__container').contains('Conversation with Pablo').should('have.length', 1);
+
+        cy.request('http://localhost:8081/disconnect');
+    })
 });

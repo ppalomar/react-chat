@@ -1,10 +1,12 @@
 ## React Chat
 
-Technologies used: 
+###Technologies used: 
 
 * chai: ^4.1.2,
+* cypress: ^2.1.0,
 * enzyme: ^3.3.0,
 * enzyme-adapter-react-16: ^1.1.1,
+* express: ^4.16.3,
 * material-ui: ^0.20.0,
 * moment: ^2.22.0,
 * react: ^16.3.1,
@@ -23,7 +25,7 @@ Run the server first. Listening on port 8000
 
 `node server`
 
-then
+then in a new terminal tab
 
 `yarn start` or `npm start`
 
@@ -38,6 +40,18 @@ You will also see any lint errors in the console.
 `yarn test` or `npm test`
 
 Launches the test runner in the interactive watch mode.<br>
+
+### E2E Test
+
+First run servers and the app in development mode
+
+1 - in a new tab run `node server`
+2 - in a new tab run `node e2e-server` //this one is required to simulate the comunication between 2 users in the chat
+3 - in a new tab run `yarn start` or `npm start`
+
+Then ejecute in a new tab the command `yarn run test:e2e` or `npm run test:e2e` to open Cypress. Then click on test suit "chat.js"
+
+To read more about Cypress please visit [https://www.cypress.io/](https://www.cypress.io/)
 
 ### Production Build
 

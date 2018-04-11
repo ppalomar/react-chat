@@ -49,7 +49,7 @@ First run servers and the app in development mode
 2 - in a new tab run `node e2e-server` //this one is required to simulate the comunication between 2 users in the chat
 3 - in a new tab run `yarn start` or `npm start`
 
-Then ejecute in a new tab the command `yarn run test:e2e` or `npm run test:e2e` to open Cypress. Then click on test suit "chat.js"
+Then ejecute in a new tab the command `yarn run test:e2e` or `npm run test:e2e` to open Cypress. Then click on test suit `chat_spec.js`.
 
 To read more about Cypress please visit [https://www.cypress.io/](https://www.cypress.io/)
 

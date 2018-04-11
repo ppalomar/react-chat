@@ -44,11 +44,14 @@ class App extends Component {
             }
             break;
           case COMMANDS.THINK:
-            this.addMessage(
-              { ...msg, text: msg.text.replace(COMMANDS.THINK, '') },
-              isMine,
-              true
-            );
+            const text = msg.text.replace(COMMANDS.THINK, '');
+            if(text){
+              this.addMessage(
+                { ...msg, text},
+                isMine,
+                true
+              );
+            }
             break;
           case COMMANDS.OOPS:
             if (isMine) {

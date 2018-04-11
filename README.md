@@ -1,6 +1,6 @@
 ## React Chat
 
-![Alt text](/sreenshots/react-chat-screenshot.png?raw=true "Screenshot of the Chat")
+![Screenshot](/screenshots/react-chat-screenshot.png?raw=true "Screenshot of the Chat")
 
 ### Technologies used: 
 
